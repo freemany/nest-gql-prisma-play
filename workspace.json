@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "projects": {
+    "nest-gql-play": {
+      "root": "apps/nest-gql-play",
+      "sourceRoot": "apps/nest-gql-play/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/nest-gql-play",
+            "main": "apps/nest-gql-play/src/main.ts",
+            "tsConfig": "apps/nest-gql-play/tsconfig.app.json",
+            "assets": ["apps/nest-gql-play/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/nest-gql-play/src/environments/environment.ts",
+                  "with": "apps/nest-gql-play/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "nest-gql-play:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/nest-gql-play/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/nest-gql-play"],
+          "options": {
+            "jestConfig": "apps/nest-gql-play/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "nest-gql-play"
+}
